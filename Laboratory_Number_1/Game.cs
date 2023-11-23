@@ -75,7 +75,6 @@ namespace Laboratory_Number_1
         }
 
         
-
         private void closeButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
