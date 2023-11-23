@@ -112,10 +112,6 @@ namespace Laboratory_Number_1
             return _answer;
 
         }
-        public void Poluchit(object sender, EventArgs e)
-        {
-
-            
-        }
+        
     }
 }
