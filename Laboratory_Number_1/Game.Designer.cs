@@ -1,4 +1,6 @@
-﻿namespace Laboratory_Number_1
+﻿using System;
+
+namespace Laboratory_Number_1
 {
     partial class Game
     {

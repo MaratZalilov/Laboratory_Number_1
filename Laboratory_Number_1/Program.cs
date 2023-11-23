@@ -16,7 +16,7 @@ namespace Laboratory_Number_1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Game());
+            Application.Run(new LoginForm());
         }
     }
 }

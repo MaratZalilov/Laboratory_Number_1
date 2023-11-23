@@ -21,13 +21,9 @@ namespace Laboratory_Number_1
             this.passField.Size = new Size(this.passField.Width, this.loginField.Height);
         }
 
-        
-
-        
-
         private void closeButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void closeButton_MouseEnter(object sender, EventArgs e)
@@ -67,6 +63,23 @@ namespace Laboratory_Number_1
         private void SecondaryPanel_MouseDown(object sender, MouseEventArgs e)
         {
             lastPoint = new Point(e.X, e.Y);
+        }
+
+        private void HideLogin_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Game game = new Game();
+            game.Show();
+        }
+
+        private void HideLogin_MouseEnter(object sender, EventArgs e)
+        {
+            HideLogin.ForeColor = Color.Blue;
+        }
+
+        private void HideLogin_MouseLeave(object sender, EventArgs e)
+        {
+            HideLogin.ForeColor = Color.White;
         }
     }
 }
