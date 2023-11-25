@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
+using System.Text;
 namespace Laboratory_Number_1
 {
 
@@ -43,11 +43,14 @@ namespace Laboratory_Number_1
             MainPanel.Controls.Remove(MainButton);
 
         }
-        private void Buttons_Click(object sender, System.EventArgs e)
+        private void Buttons_Click(object sender, EventArgs e)
         {
             
-            
-            MessageBox.Show("А я знал");
+            MyButton b = (MyButton)sender;
+            int i = b.GetNum();
+            MessageBox.Show(i.ToString());
+           
+           // MyButton.MethodSelection();
 
         }
         
@@ -56,17 +59,18 @@ namespace Laboratory_Number_1
 
             int W = 330, H = 200;
             MyButton[] button = new MyButton[3];
-
+            List<string> buttons = new List<string>();
             for (int j = 0; j < 3; j++)
             {
-
-                button[j] = new MyButton(j+1, MyButton.GiveAnAnswer());
+               
+                 
+                button[j] = new MyButton(j, MyButton.GiveAnAnswer(),buttons);
                 button[j].BackColor = Color.Orange;
                 button[j].Name = $"Buttons"+$"{j}";
+             //   buttons.Add(buttons[j]);
                 button[j].Size = new Size(200, 50);
                 button[j].Location = new Point(W, H += 50);
                 button[j].Click += Buttons_Click;
-                
                 button[j].Tag = new Point(j);
                 MainPanel.Controls.Add(button[j]);
                 //MainPanel.Controls[$"Buttons{j}"].Enabled = true;
@@ -83,28 +87,37 @@ namespace Laboratory_Number_1
     }
     public class MyButton : Button
     {
-        private static int number;
+        public static int number;
+        public static List<string> _nameButton;
         public static string _answer;
-        public MyButton(int i, string name)
+        public MyButton(int i, string name,List<string> nameButton)
         {
             number = i;
             this.Text = name;
+            nameButton = _nameButton;
         }
+        public int GetNum()
+        {
 
+            return number;
+        }
         public static string GiveAnAnswer()
         {
             //new MyButton(number, number.ToString());
             List<string> answer = new List<string>();
-            answer.Add("Нет(да)");
-            answer.Add("Да!!!");
-            answer.Add("Скорее да, чем нет");
-            
+            answer.Add("Я");
+            answer.Add("Я не отвечаю на провокационные");
+            answer.Add("Никита");
+            answer.Add("Не никита");
+            answer.Add("Дима");
+            answer.Add("Олег");
+            answer.Add("Рома");
+
             for (int j = 0; j < answer.Count; j++)
             {
-                if (j == number)
+                if (j == number && _answer != answer[j])
                 {
                     _answer = answer[j];
-                    
                     break;
                 }
                 
@@ -113,5 +126,14 @@ namespace Laboratory_Number_1
 
         }
         
+      /*  public static void MethodSelection()
+        {
+
+            for (int i = 0; i < number; i++)
+            {
+                if ()
+            }
+            
+        }*/
     }
 }
