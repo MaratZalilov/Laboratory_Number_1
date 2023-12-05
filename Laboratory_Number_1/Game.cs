@@ -12,7 +12,7 @@ namespace Laboratory_Number_1
     public partial class Game : Form
     {
 
-        private System.Windows.Forms.Button[] button;
+        private System.Windows.Forms.Button[] button =  new System.Windows.Forms.Button[3];
         private List<string> _score = new List<string>();
 
         private string[,] _answerAndQuestion = null;
@@ -24,6 +24,7 @@ namespace Laboratory_Number_1
         {
 
             InitializeComponent();
+
         }
         private void closeButton_MouseEnter(object sender, EventArgs e)
         {
@@ -54,10 +55,8 @@ namespace Laboratory_Number_1
         }
         private void MainButton_Click(object sender, EventArgs e)
         {
-            SecondaryButton();
-            
             ReadTheDock();
-
+            SecondaryButton();
             AddTextForTheButton();
             MainPanel.Controls.Remove(MainButton);
 
@@ -76,58 +75,55 @@ namespace Laboratory_Number_1
         public void SecondaryButton()
         {
             int W = 330, H = 200;
-            button = new System.Windows.Forms.Button[3];
-            List<string> buttons = new List<string>();
             for (int j = 0; j < 3; j++)
             {
                 button[j] = new System.Windows.Forms.Button()
                 {
                     BackColor = Color.Orange,
                     Name = $"Buttons" + $"{j}",
-                    
                     Size = new Size(200, 50),
                     Location = new Point(W, H += 50),
-
                 };
-                button[j].Click += Buttons_Click;
                 MainPanel.Controls.Add(button[j]);
+                button[j].Click += Buttons_Click;
+
             }
         }
         public void AddTextForTheButton()
         {
-            if(_answerNumber < 4) 
+            if (_answerNumber < 4)
             {
                 for (int i = 1; i < 4; i++)
                 {
 
                     button[i - 1].Text = _answerAndQuestion[_answerNumber, i];
 
-
+                    MainText.Text = _answerAndQuestion[_answerNumber, 0];
                 }
             }
             else
             {
-                string str = string.Join(", ", _score); 
+                string str = string.Join(", ", _score);
                 MessageBox.Show(str);
             };
-            
+
         }
         public void ReadTheDock()
         {
-            _answerAndQuestion = new string[4,4];
+            _answerAndQuestion = new string[4, 4];
             string name;
             try
-            {  
-                StreamReader sr = new StreamReader(@"C:\Users\Пользователь\Source\Repos\Laboratory_Number_2\Laboratory_Number_1\QuestionAndAnswer\QuestionAndAnswer.txt");
-                    for (int i = 0; i < 4; i++)
-                    { 
+            {
+                StreamReader sr = new StreamReader(@"C:\Users\Zalilov Marat\source\repos\Laboratory_Number_1\Laboratory_Number_1\QuestionAndAnswer\QuestionAndAnswer.txt");
+                for (int i = 0; i < 4; i++)
+                {
                     name = sr.ReadLine();
-                   
-                        _answerAndQuestion[i,0] = name.Split('|')[0];
-                        _answerAndQuestion[i,1] = name.Split('/')[1];
-                        _answerAndQuestion[i, 2] = name.Split('/')[2];
-                        _answerAndQuestion[i, 3] = name.Split('/')[3];
-                    };
+
+                    _answerAndQuestion[i, 0] = name.Split('|')[0];
+                    _answerAndQuestion[i, 1] = name.Split('/')[1];
+                    _answerAndQuestion[i, 2] = name.Split('/')[2];
+                    _answerAndQuestion[i, 3] = name.Split('/')[3];
+                };
             }
             catch (Exception ex)
             {
