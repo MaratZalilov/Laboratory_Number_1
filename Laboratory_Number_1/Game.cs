@@ -13,10 +13,12 @@ namespace Laboratory_Number_1
     {
 
         private System.Windows.Forms.Button[] button =  new System.Windows.Forms.Button[3];
-        private List<string> _score = new List<string>();
+        private List<string> _selectedAnswer = new List<string>();
+        private List<string> _trueAnswer = new List<string> { "Когда высовывает ее из окна", "Кактус", "Перун", "Часы", "Любой" };
 
         private string[,] _answerAndQuestion = null;
         private int _answerNumber = 0;
+        private int _score = 0;
 
         Point lastPoint;
 
@@ -66,7 +68,7 @@ namespace Laboratory_Number_1
         {
             AddTextForTheButton();
             System.Windows.Forms.Button b = (System.Windows.Forms.Button)sender;
-            _score.Add(b.Text);
+            _selectedAnswer.Add(b.Text);
             _answerNumber++;
 
 
@@ -91,7 +93,7 @@ namespace Laboratory_Number_1
         }
         public void AddTextForTheButton()
         {
-            if (_answerNumber < 4)
+            if (_answerNumber < 5)
             {
                 for (int i = 1; i < 4; i++)
                 {
@@ -103,25 +105,40 @@ namespace Laboratory_Number_1
             }
             else
             {
-                string str = string.Join(", ", _score);
-                MessageBox.Show(str);
+                for(int i = 0;i < 5; i++)
+                {
+                    if (_selectedAnswer[i] == _trueAnswer[i])
+                    {
+                        _score = i+1;
+                    }
+                    else
+                    {
+                        
+                        MainPanel.Controls.Remove(MainPanel.Controls[$"Buttons0"]);
+                        MainPanel.Controls.Remove(MainPanel.Controls[$"Buttons1"]);
+                        MainPanel.Controls.Remove(MainPanel.Controls[$"Buttons2"]);
+                    }
+                }
+                MainText.Text = $"Вы ответили правильно на {_score.ToString()} вопроса";
             };
-
+            
         }
+
         public void ReadTheDock()
         {
-            _answerAndQuestion = new string[4, 4];
+            _answerAndQuestion = new string[5, 4];
             string name;
             try
             {
                 StreamReader sr = new StreamReader(@"C:\Users\Zalilov Marat\source\repos\Laboratory_Number_1\Laboratory_Number_1\QuestionAndAnswer\QuestionAndAnswer.txt");
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     name = sr.ReadLine();
 
                     _answerAndQuestion[i, 0] = name.Split('|')[0];
                     _answerAndQuestion[i, 1] = name.Split('/')[1];
                     _answerAndQuestion[i, 2] = name.Split('/')[2];
+                    _answerAndQuestion[i, 3] = name.Split('/')[3];
                     _answerAndQuestion[i, 3] = name.Split('/')[3];
                 };
             }

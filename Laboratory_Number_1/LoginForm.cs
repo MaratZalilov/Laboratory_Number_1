@@ -81,5 +81,19 @@ namespace Laboratory_Number_1
         {
             HideLogin.ForeColor = Color.White;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(loginField.Text == DataBase._loginUser&& passField.Text == DataBase._passwordUser)
+            {
+                this.Hide();
+                Game game = new Game();
+                game.Show();
+            }
+            else
+            {
+                MessageBox.Show("Неправильный логин или пароль");
+            }
+        }
     }
 }
