@@ -93,6 +93,7 @@
   <ItemGroup>
     <Content Include="images\lock_icon.png" />
     <Content Include="images\user_icon.png" />
+    <Content Include="QuestionAndAnswer\QuestionAndAnswer.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
