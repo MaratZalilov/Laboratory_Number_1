@@ -69,7 +69,7 @@ namespace Laboratory_Number_1
             AddTextForTheButton();
             System.Windows.Forms.Button b = (System.Windows.Forms.Button)sender;
             _selectedAnswer.Add(b.Text);
-            _answerNumber++;
+            
 
 
         }
@@ -102,6 +102,7 @@ namespace Laboratory_Number_1
 
                     MainText.Text = _answerAndQuestion[_answerNumber, 0];
                 }
+                _answerNumber++;
             }
             else
             {
